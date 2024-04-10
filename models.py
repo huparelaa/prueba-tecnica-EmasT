@@ -12,7 +12,7 @@ class Product:
         self.materials = materials
 
     def total_cost(self):
-        return sum(material.value * material.quantity for material in self.materials)
+        return sum([material.value for material in self.materials])
     
     def __str__(self):
         return f"Producto {self.name} con codigo {self.code} y costo total {self.total_cost()}"
@@ -51,13 +51,15 @@ class MaterialFactory:
     def get_available_materials(self):
         print("Materiales disponibles:")
         for material in self.materials.values():
-            print(f"Hay {material.quantity} unidades de {material.name} con codigo {material.code}")
+            print(f"Hay {material.quantity} unidades de {material.name} con codigo {material.code} y valor {material.value}")
 
     def use_material(self, code, quantity):
         if code not in self.materials:
-            raise ValueError("Material no encontrado")
+            print("Material no encontrado")
+            return
         if quantity > self.materials[code].quantity:
-            raise ValueError("No hay suficiente material")
+            print("No hay suficiente material")
+            return
         self.materials[code].quantity -= quantity
 
     def __str__(self):
