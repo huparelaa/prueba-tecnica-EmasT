@@ -2,7 +2,6 @@
 class Circulo:
     def __init__(self, radio):
         self.radio = radio
-        self.name = "circulo"
 
     def area(self):
         return 3.1416 * (self.radio ** 2)
@@ -13,7 +12,6 @@ class Circulo:
 class Cuadrado:
     def __init__(self, lado):
         self.lado = lado
-        self.name = "cuadrado"
 
     def area(self):
         return self.lado ** 2
@@ -25,7 +23,6 @@ class Triangulo:
     def __init__(self, base, altura):
         self.base = base
         self.altura = altura
-        self.name = "triangulo"
 
     def area(self):
         return (self.base * self.altura) / 2
@@ -36,7 +33,6 @@ class Triangulo:
     
 class Rectangulo:
     def __init__(self, base, altura):
-        self.name = "rectangulo"
         self.base = base
         self.altura = altura
 
@@ -71,6 +67,10 @@ while True:
     val = input("Ingrese el numero de la figura que desea crear: ")
     if val == "exit":
         break
+    if val > str(len(figuras)) or val < "1":
+        print("Figura no disponible")
+        print("\n")
+        continue
     val = list(figuras)[int(val) - 1]
 
     if val in figuras:
