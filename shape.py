@@ -1,5 +1,8 @@
+class Shape:
+    def area(self):
+        pass
 
-class Circulo:
+class Circulo(Shape):
     def __init__(self, radio):
         self.radio = radio
 
@@ -9,7 +12,7 @@ class Circulo:
     def __str__(self):
         return f"Circulo de radio {self.radio}"
     
-class Cuadrado:
+class Cuadrado(Shape):
     def __init__(self, lado):
         self.lado = lado
 
@@ -18,8 +21,8 @@ class Cuadrado:
 
     def __str__(self):
         return f"Cuadrado de lado {self.lado}"
-    
-class Triangulo:
+
+class Triangulo(Shape):
     def __init__(self, base, altura):
         self.base = base
         self.altura = altura
@@ -27,11 +30,10 @@ class Triangulo:
     def area(self):
         return (self.base * self.altura) / 2
 
-    
     def __str__(self):
         return f"Triangulo de base {self.base} y altura {self.altura}"
     
-class Rectangulo:
+class Rectangulo(Shape):
     def __init__(self, base, altura):
         self.base = base
         self.altura = altura
@@ -41,20 +43,9 @@ class Rectangulo:
     
     def __str__(self):
         return f"Rectangulo de base {self.base} y altura {self.altura}"
-    
-class ShapeFactory:
-    def __init__(self):
-        self.figuras = {
-            "circulo": Circulo,
-            "cuadrado": Cuadrado,
-            "triangulo": Triangulo,
-            "rectangulo": Rectangulo
-        }
 
-    def create_shape(self, tipo, *args):
-        return self.figuras[tipo](*args)
-    
-figuras = ShapeFactory().figuras.keys()
+figuras = ["circulo", "cuadrado", "triangulo", "rectangulo"]
+
 
 print("Figuras disponibles: ")
 
@@ -71,24 +62,23 @@ while True:
         print("Figura no disponible")
         print("\n")
         continue
-    val = list(figuras)[int(val) - 1]
+    figura_seleccionada = list(figuras)[int(val) - 1]
 
-    if val in figuras:
-        factory = ShapeFactory()
+    if figura_seleccionada in figuras:
         if val == "circulo":
             radio = float(input("Ingrese el radio del circulo: "))
-            figura = factory.create_shape(val, radio)
+            figura = Circulo(radio)
         elif val == "cuadrado":
             lado = float(input("Ingrese el lado del cuadrado: "))
-            figura = factory.create_shape(val, lado)
+            figura = Cuadrado(lado)
         elif val == "triangulo":
             base = float(input("Ingrese la base del triangulo: "))
             altura = float(input("Ingrese la altura del triangulo: "))
-            figura = factory.create_shape(val, base, altura)
+            figura = Triangulo(base, altura)
         elif val == "rectangulo":
             base = float(input("Ingrese la base del rectangulo: "))
             altura = float(input("Ingrese la altura del rectangulo: "))
-            figura = factory.create_shape(val, base, altura)
+            figura = Rectangulo(base, altura)
 
         print(f"Area de la figura: {figura.area()}")
         print(f"Figura: {figura}")
